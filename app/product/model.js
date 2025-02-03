@@ -21,6 +21,16 @@ price: {
 
 image_url: String,
 
+category: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category' // diambil dari model Category
+},
+
+tags: {
+    type: Schema.Types.ObjectId,
+    ref: 'Tag' // diambil dari model Tag
+}
+
 }, {timestamps: true});
 
 module.exports = model('Product', productSchema)
