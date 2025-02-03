@@ -6,7 +6,7 @@ const store = async(req, res, next) => {
         let category = new Categories(payload);
         await category.saave();
         return res.json(category);
-    } catch (error) {
+    } catch (err) {
         if(err && err.name === 'ValidationError'){
             return res.json({
                 error: 1,
