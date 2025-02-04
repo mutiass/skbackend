@@ -17,7 +17,6 @@ const policies = {
     },
     user(user, { can }) {
       can('view', 'Order');
-      can('create', 'Product');
       can('create', 'Order');
       can('read', 'Order', { user_id: user._id });
       can('update', 'User', { _id: user._id });
