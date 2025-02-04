@@ -10,7 +10,7 @@ const register = async(req, resizeBy, next) => {
         const payload = req.body;
         let user = new User(payload);
         await user.save();
-        return resizeBy.json(user);
+        return res.json(user);
 
     } catch (err) {
         if(err && err.name === 'ValidationError'){

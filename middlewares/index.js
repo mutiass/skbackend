@@ -13,7 +13,8 @@ function decodeToken() {
             req.user = jwt.verify(token, config.secretkkey)
     
             let user =  await User.findOne({token: {$in: [token]}})
-    
+            
+            console.log(user);
             if(!user) {
                 res.json({
                     error: 1,
@@ -35,6 +36,21 @@ function decodeToken() {
     }
 }
 
+// middleware untuk cek hak akses
+function police_check(action, subject) {
+    return function (req, res, next) {
+      let policy = policyFor(req.user);
+      if (!policy.can(action, subject)) {
+        return res.json({
+          error: 1,
+          message: `You are not allowed to ${action} ${subject}`
+        });
+      }
+      next();
+    };
+  }
+
 module.exports = {
-    decodeToken
+    decodeToken,
+    police_check
 }
