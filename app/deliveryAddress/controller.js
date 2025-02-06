@@ -1,10 +1,12 @@
-const deliveryAddress = require('./model');
+const DeliveryAddress = require('./model');
+// import DeliveryAddress from './model'
+
 
 const store = async (req, res, next) => {
   try {
     let payload = req.body;
     let user = req.user;
-    let address = new deliveryAddress({ ...payload, user: user._id });
+    let address = new DeliveryAddress({ ...payload, user: user._id });
     await address.save();
     return res.json(address);
 
